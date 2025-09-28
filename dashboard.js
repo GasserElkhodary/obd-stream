@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Manually change this URL to your Jetson's IP address or your localtunnel URL.
     // For local connection: 'ws://192.168.1.XX:8080'
     // For localtunnel:    'wss://your-subdomain.loca.lt'
-    const socket = new WebSocket('ws://127.0.0.1:8080');
+    const socket = new WebSocket('ws://neat-frogs-run.loca.lt');
 
     socket.onopen = () => {
         setStatus('Status: Connected to vehicle.', 'success');
