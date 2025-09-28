@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Telemetry Dashboard</title>
+    <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+
+    <h1>Real-Time Vehicle Diagnostics</h1>
+
+    <div id="media-container">
+        <div id="camera-container">
+            <img id="cameraFeed" src="" alt="Live camera feed from the vehicle.">
+            <div class="media-label">CAMERA VIEW</div>
+            <div id="camera-placeholder">Connecting to camera...</div>
+        </div>
+        <div id="lidar-container">
+            <div class="media-label">LIDAR VIEW</div>
+            <canvas id="lidar-canvas"></canvas>
+        </div>
+    </div>
+
+    <div id="status">Connecting to server...</div>
+
+    <div id="dashboard">
+        <div class="metric">
+            <div class="metric-label">Ignition State</div>
+            <div class="metric-value text-status" id="ignitionState">---</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Engine Speed</div>
+            <div class="metric-value"><span id="rpm">---</span><span class="unit">rpm</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Vehicle Speed</div>
+            <div class="metric-value"><span id="speed">---</span><span class="unit">km/h</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Coolant Temp</div>
+            <div class="metric-value"><span id="coolantTemp">---</span><span class="unit">°C</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Engine Load</div>
+            <div class="metric-value"><span id="engineLoad">---</span><span class="unit">%</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Throttle Position</div>
+            <div class="metric-value"><span id="throttlePos">---</span><span class="unit">%</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">MAF Air Flow</div>
+            <div class="metric-value"><span id="mafAirFlow">---</span><span class="unit">g/s</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">MPG</div>
+            <div class="metric-value" id="mpg">---</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Fuel Level</div>
+            <div class="metric-value"><span id="fuelLevel">---</span><span class="unit">%</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Battery Voltage</div>
+            <div class="metric-value"><span id="batteryVoltage">---</span><span class="unit">V</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Idling Time</div>
+            <div class="metric-value" id="idlingTime">---</div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Acceleration</div>
+            <div class="metric-value"><span id="acceleration">---</span><span class="unit">m/s²</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Trip Distance</div>
+            <div class="metric-value"><span id="tripDistance">---</span><span class="unit">km</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Fault Codes (DTCs)</div>
+            <div class="metric-value small-text" id="dtc">---</div>
+        </div>
+    </div>
+
+    <script src="./dashboard.js"></script>
+</body>
+</html>
