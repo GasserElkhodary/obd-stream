@@ -2,17 +2,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     // --- Configuration and DOM Element Selection ---
     const statusDiv = document.getElementById('status');
-    // IMPORTANT: Update this URL to your Python server's public or local IP for the OBD data (Port 8080)
-    const OBD_WEBSOCKET_URL = 'wss://sour-pillows-drive.loca.lt'; 
+    // IMPORTANT: Update this URL with your actual public or local IP/tunnel for OBD data (Port 8080)
+    const OBD_WEBSOCKET_URL = 'wss://kind-nights-share.loca.lt'; // Original URL from file
     const socket = new WebSocket(OBD_WEBSOCKET_URL);
 
     // --- New Camera WebSocket Configuration ---
-    // IMPORTANT: Update this URL to your Python server's public or local IP for the Camera stream (Port 8081)
-    const CAMERA_WEBSOCKET_URL = 'ws://violet-dots-show.loca.lt'; 
+    // IMPORTANT: Update this URL with your actual public or local IP/tunnel for Camera stream (Port 8081)
+    const CAMERA_WEBSOCKET_URL = 'ws://violet-dots-show.loca.lt'; // Placeholder, replace with your actual tunnel
     let cameraSocket = null;
     let isCameraOn = false;
 
-    // DOM Elements (All these MUST be defined inside DOMContentLoaded)
+    // DOM Elements
     const dataElements = {
         rpm: document.getElementById('rpm'),
         speed: document.getElementById('speed'),
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
     // ====================================================================
-    //                  CAMERA STREAMING FUNCTIONS
+    //                  CAMERA STREAMING FUNCTIONS (WebSockets)
     // ====================================================================
 
     /**
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
     // ====================================================================
-    //                  OBD-II DATA FUNCTIONS
+    //                  OBD-II DATA FUNCTIONS (Port 8080)
     // ====================================================================
 
     function resetDashboard() {
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         statusDiv.className = type; // 'success', 'error', or 'warning'
     }
 
-    // --- OBD WebSocket Handlers (Port 8080) ---
+    // --- OBD WebSocket Handlers ---
 
     socket.onopen = function(event) {
         setStatus('Status: Connected to OBD server. Awaiting OBD-II data...', 'warning');
@@ -187,7 +187,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     element.classList.remove('Off', 'On', 'Running');
                     element.classList.add(value);
                 } else if (key === 'dtc') {
-                    const hasDTCs = value && value !== 'None';
+                    // Check if value is not 'None' (from the server) or an empty string
+                    const hasDTCs = value && value !== 'None'; 
                     element.textContent = hasDTCs ? value : 'None';
                     element.classList.remove('has-dtc', 'no-dtc');
                     element.classList.add(hasDTCs ? 'has-dtc' : 'no-dtc');
