@@ -1,11 +1,11 @@
 const statusDiv = document.getElementById('status');
 // IMPORTANT: Update this URL to your Python server's public or local IP for the OBD data (Port 8080)
-const OBD_WEBSOCKET_URL = 'wss://kind-nights-share.loca.lt'; 
+const OBD_WEBSOCKET_URL = 'wss://sour-pillows-drive.loca.lt'; 
 const socket = new WebSocket(OBD_WEBSOCKET_URL);
 
 // --- New Camera WebSocket Configuration ---
 // IMPORTANT: Update this URL to your Python server's public or local IP for the Camera stream (Port 8081)
-const CAMERA_WEBSOCKET_URL = 'ws://YOUR_SERVER_IP:8081'; 
+const CAMERA_WEBSOCKET_URL = 'ws://violet-dots-show.loca.lt'; 
 let cameraSocket = null;
 let isCameraOn = false;
 
