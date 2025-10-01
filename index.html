@@ -10,15 +10,25 @@
 
     <h1>Real-Time Vehicle Diagnostics</h1>
 
+    <div id="control-panel">
+        <div id="camera-controls">
+            <button id="camera-toggle-btn">Show Camera Feed</button>
+            <div id="camera-toggle-status">Camera is OFF</div>
+        </div>
+        <div id="lidar-controls">
+            <button id="lidar-toggle-btn" disabled>Show LiDar View</button>
+        </div>
+    </div>
     <div id="media-container">
         <div id="camera-container">
             <img id="cameraFeed" src="" alt="Live camera feed from the vehicle.">
             <div class="media-label">CAMERA VIEW</div>
-            <div id="camera-placeholder">Connecting to camera...</div>
+            <div id="camera-placeholder">Camera Feed is Ready. Click 'Show Camera Feed'.</div>
         </div>
         <div id="lidar-container">
-            <div class="media-label">LIDAR VIEW</div>
+            <div class="media-label">LIDAR VIEW (WIP)</div>
             <canvas id="lidar-canvas"></canvas>
+            <div id="lidar-placeholder">LiDAR visualization requires ROS Bridge and a 3D library (e.g., Three.js).</div>
         </div>
     </div>
 
@@ -64,6 +74,10 @@
         <div class="metric">
             <div class="metric-label">Battery Voltage</div>
             <div class="metric-value"><span id="batteryVoltage">---</span><span class="unit">V</span></div>
+        </div>
+        <div class="metric">
+            <div class="metric-label">Battery State of Charge</div>
+            <div class="metric-value"><span id="soc">---</span><span class="unit">%</span></div>
         </div>
         <div class="metric">
             <div class="metric-label">Idling Time</div>
