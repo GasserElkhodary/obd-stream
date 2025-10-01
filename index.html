@@ -4,36 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehicle Telemetry Dashboard</title>
+    <!-- Assuming dashboard.css is available in the same directory -->
     <link rel="stylesheet" href="./dashboard.css">
 </head>
 <body>
 
     <h1>Real-Time Vehicle Diagnostics</h1>
-
-    <div id="control-panel">
-        <div id="camera-controls">
-            <button id="camera-toggle-btn">Show Camera Feed</button>
-            <div id="camera-toggle-status">Camera is OFF</div>
-        </div>
-        <div id="lidar-controls">
-            <button id="lidar-toggle-btn" disabled>Show LiDar View</button>
-        </div>
+    
+    <!-- Camera Controls Section -->
+    <div id="camera-controls">
+        <button id="camera-toggle-btn">Show Camera Feed</button>
+        <div id="camera-toggle-status">Camera is OFF</div>
     </div>
+
+    <!-- Media Container for Camera and Lidar Views -->
     <div id="media-container">
         <div id="camera-container">
+            <!-- IMPORTANT: Changed from <video> to <img> to support Base64 stream from Python server -->
             <img id="cameraFeed" src="" alt="Live camera feed from the vehicle.">
-            <div class="media-label">CAMERA VIEW</div>
-            <div id="camera-placeholder">Camera Feed is Ready. Click 'Show Camera Feed'.</div>
+            <div class="media-label">CAMERA VIEW (YOLO)</div>
+            <div id="camera-placeholder">Camera is ready. Click 'Show Camera Feed'.</div>
         </div>
         <div id="lidar-container">
             <div class="media-label">LIDAR VIEW (WIP)</div>
             <canvas id="lidar-canvas"></canvas>
-            <div id="lidar-placeholder">LiDAR visualization requires ROS Bridge and a 3D library (e.g., Three.js).</div>
+            <div id="lidar-placeholder">LiDAR visualization placeholder.</div>
         </div>
     </div>
 
+    <!-- Status Bar for Connection Updates -->
     <div id="status">Connecting to server...</div>
 
+    <!-- OBD-II Dashboard Metrics Grid -->
     <div id="dashboard">
         <div class="metric">
             <div class="metric-label">Ignition State</div>
@@ -97,6 +99,7 @@
         </div>
     </div>
 
-    <script src="./dashboard.js"></script>
+    <!-- Script reference to the latest JavaScript file -->
+    <script src="./dashbaord.js"></script>
 </body>
 </html>
