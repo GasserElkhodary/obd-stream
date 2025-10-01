@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const socket = new WebSocket(OBD_WEBSOCKET_URL);
 
     // 2. IMPORTANT: REPLACE WITH YOUR ACTIVE WSS:// TUNNEL FOR CAMERA (8081)
-    const CAMERA_WEBSOCKET_URL = 'wss://open-groups-wash.loca.lt'; // REPLACE THIS
+    const CAMERA_WEBSOCKET_URL = 'wss://tall-shirts-cross.loca.lt'; // REPLACE THIS
     let cameraSocket = null;
     let isCameraOn = false;
 
