@@ -3,16 +3,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // --- Configuration and DOM Element Selection ---
     const statusDiv = document.getElementById('status');
     // IMPORTANT: Update this URL with your actual public or local IP/tunnel for OBD data (Port 8080)
-    const OBD_WEBSOCKET_URL = 'wss://kind-nights-share.loca.lt'; // Original URL from file
+    const OBD_WEBSOCKET_URL = 'wss://kind-nights-share.loca.lt'; 
     const socket = new WebSocket(OBD_WEBSOCKET_URL);
 
     // --- New Camera WebSocket Configuration ---
     // IMPORTANT: Update this URL with your actual public or local IP/tunnel for Camera stream (Port 8081)
-    const CAMERA_WEBSOCKET_URL = 'ws://violet-dots-show.loca.lt'; // Placeholder, replace with your actual tunnel
+    const CAMERA_WEBSOCKET_URL = 'ws://violet-dots-show.loca.lt'; // Placeholder, use your actual tunnel
     let cameraSocket = null;
     let isCameraOn = false;
 
-    // DOM Elements
+    // DOM Elements (These are now safe to access inside DOMContentLoaded)
     const dataElements = {
         rpm: document.getElementById('rpm'),
         speed: document.getElementById('speed'),
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         isCameraOn = false;
     }
 
-    // Attach event listener to the camera toggle button
+    // Attach event listener to the camera toggle button - THIS LINE IS NOW SAFE!
     cameraToggleButton.addEventListener('click', () => {
         if (isCameraOn) {
             stopCamera();
