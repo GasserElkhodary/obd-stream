@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // --- Configuration and DOM Element Selection ---
     const statusDiv = document.getElementById('status');
     // IMPORTANT: Update this URL with your actual public or local IP/tunnel for OBD data (Port 8080)
-    const OBD_WEBSOCKET_URL = 'wss://kind-nights-share.loca.lt'; 
+    const OBD_WEBSOCKET_URL = 'wss://whole-nails-itch.loca.lt'; 
     const socket = new WebSocket(OBD_WEBSOCKET_URL);
 
     // --- New Camera WebSocket Configuration ---
     // IMPORTANT: Update this URL with your actual public or local IP/tunnel for Camera stream (Port 8081)
-    const CAMERA_WEBSOCKET_URL = 'ws://violet-dots-show.loca.lt'; // Placeholder, use your actual tunnel
+    const CAMERA_WEBSOCKET_URL = 'ws://tidy-moose-take.loca.lt'; // Placeholder, use your actual tunnel
     let cameraSocket = null;
     let isCameraOn = false;
 
