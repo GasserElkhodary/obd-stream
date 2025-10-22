@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const cameraToggleStatus = document.getElementById('camera-toggle-status');
     const cameraPlaceholder = document.getElementById('camera-placeholder');
 
+    // LiDAR elements removed as they are no longer in the HTML
+
 
     // ====================================================================
     //                  CAMERA STREAMING FUNCTIONS (WebSockets)
@@ -51,7 +53,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         cameraPlaceholder.style.display = 'flex';
         videoElement.style.display = 'none';
         cameraToggleStatus.textContent = 'Camera is ON (Connecting...)';
-        cameraContainer.classList.add('visible');
+        cameraContainer.classList.add('visible'); // This class now controls visibility
         
         try {
             if (cameraSocket) {
@@ -85,8 +87,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             };
 
             cameraSocket.onclose = function() {
-                stopCamera();
-                cameraToggleStatus.textContent = 'Camera is OFF (Stream Ended)';
+                // Only call stopCamera if it wasn't already stopped manually
+                if (isCameraOn) {
+                    stopCamera();
+                    cameraToggleStatus.textContent = 'Camera is OFF (Stream Ended)';
+                }
             };
 
             cameraSocket.onerror = function(error) {
@@ -100,7 +105,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             // This catch handles errors during the creation of the WebSocket object itself
             console.error("Error initializing camera socket: ", error); 
             cameraToggleStatus.textContent = 'Camera Unavailable (Socket Init Failed)';
-            cameraToggleButton.disabled = true;
+            // Don't disable the button, allow user to retry
             isCameraOn = false;
         }
     }
@@ -114,7 +119,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             cameraSocket = null;
         }
         videoElement.src = ''; // Clear image source
-        cameraContainer.classList.remove('visible');
+        videoElement.style.display = 'none'; // Hide video element
+        cameraPlaceholder.style.display = 'flex'; // Show placeholder
+        cameraContainer.classList.remove('visible'); // Hide the container
         cameraToggleButton.textContent = 'Show Camera Feed';
         cameraToggleStatus.textContent = 'Camera is OFF';
         isCameraOn = false;
@@ -152,7 +159,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function setStatus(message, type) {
         statusDiv.textContent = message;
-        statusDiv.className = type; // 'success', 'error', or 'warning'
+        statusDiv.className = `status ${type}`; // Ensure 'status' class is always present
     }
 
     // --- OBD WebSocket Handlers ---
@@ -170,7 +177,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             return;
         }
         
-        setStatus('Status: Connected and receiving data.', 'success');
+        // Only set to success if it's not already success, to avoid needless flashing
+        if (!statusDiv.classList.contains('success')) {
+            setStatus('Status: Connected and receiving data.', 'success');
+        }
 
         for (const key in data) {
             if (dataElements[key]) {
@@ -200,7 +210,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     date.setSeconds(value);
                     element.textContent = date.toISOString().substr(11, 8);
                 } else if (typeof value === 'number') {
-                    element.textContent = Number(value).toFixed(1);
+                    // Don't fix 'mpg' to 1 decimal, allow it to be more precise or integer
+                    if (key === 'mpg') {
+                         element.textContent = Number(value).toFixed(1); // Keep 1 decimal for MPG
+                    } else if (key === 'acceleration') {
+                         element.textContent = Number(value).toFixed(2); // 2 decimals for accel
+                    } else if (key === 'tripDistance') {
+                         element.textContent = Number(value).toFixed(2); // 2 decimals for distance
+                    }
+                    else {
+                        element.textContent = Number(value).toFixed(1);
+                    }
                 } else {
                     element.textContent = value;
                 }
