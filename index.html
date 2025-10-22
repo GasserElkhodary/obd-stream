@@ -10,9 +10,19 @@
 
     <h1>Real-Time Vehicle Diagnostics</h1>
     
-    <div id="camera-controls">
-        <button id="camera-toggle-btn">Show Camera Feed</button>
-        <div id="camera-toggle-status">Camera is OFF</div>
+    <!-- Grouped control buttons together -->
+    <div id="controls-container">
+        <div id="camera-controls">
+            <button id="camera-toggle-btn">Show Camera Feed</button>
+            <div id="camera-toggle-status">Camera is OFF</div>
+        </div>
+        <!-- New Foxglove LiDAR Button -->
+        <div id="lidar-controls">
+            <button id="lidar-link-btn" onclick="window.open('https://app.foxglove.dev/~/view?ds=foxglove-websocket&ds.url=wss://mkz-foxglove.loca.lt', '_blank')">
+                Open LiDAR View
+            </button>
+            <div id="lidar-link-status">Foxglove (External)</div>
+        </div>
     </div>
 
     <div id="media-container">
@@ -22,11 +32,7 @@
             <div class="media-label">CAMERA VIEW (YOLO)</div>
             <div id="camera-placeholder">Camera is ready. Click 'Show Camera Feed'.</div>
         </div>
-        <div id="lidar-container">
-            <div class="media-label">LIDAR VIEW (WIP)</div>
-            <canvas id="lidar-canvas"></canvas>
-            <div id="lidar-placeholder">LiDAR visualization placeholder.</div>
-        </div>
+        <!-- LiDAR container removed -->
     </div>
 
     <div id="status">Connecting to server...</div>
