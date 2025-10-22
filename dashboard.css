@@ -57,6 +57,55 @@ h1 {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* ==========================================================================
+   2.5 CONTROL BUTTONS (Camera & LiDAR Link)
+   ========================================================================== */
+
+#controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+#camera-controls,
+#lidar-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#camera-toggle-btn,
+#lidar-link-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#camera-toggle-btn:hover,
+#lidar-link-btn:hover {
+    background-color: #0056b3; /* Darker blue */
+    box-shadow: var(--card-shadow);
+    transform: translateY(-2px);
+}
+
+#camera-toggle-status,
+#lidar-link-status {
+    font-size: 0.85em;
+    color: var(--secondary-text);
+}
+
 
 /* ==========================================================================
    3. LAYOUT CONTAINERS
@@ -65,7 +114,7 @@ h1 {
 #media-container {
     display: flex;
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    justify-content: center;
+    justify-content: center; /* Center the single camera view */
     gap: 1.5rem;
     width: 100%;
     max-width: 1200px;
@@ -82,27 +131,35 @@ h1 {
 
 
 /* ==========================================================================
-   4. MEDIA WINDOWS (CAMERA & LIDAR)
+   4. MEDIA WINDOWS (CAMERA)
    ========================================================================== */
 
-#camera-container,
-#lidar-container {
+#camera-container {
     background-color: #000;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     overflow: hidden;
     position: relative;
-    flex: 1 1 480px; /* Flex properties for responsive sizing */
+    /* Adjusted flex properties to allow it to grow but not shrink too small */
+    flex: 1 1 640px; 
+    max-width: 960px; /* Give it a max-width */
     min-width: 320px;
     aspect-ratio: 16 / 9;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all var(--transition-speed) ease;
+    /* Hide by default until toggled */
+    display: none; 
 }
 
-#camera-container:hover,
-#lidar-container:hover {
+/* This class is added by JS to show the camera */
+#camera-container.visible {
+    display: flex;
+}
+
+
+#camera-container:hover {
     border-color: var(--border-color-hover);
     box-shadow: 0 0 15px var(--accent-glow);
 }
@@ -125,18 +182,16 @@ h1 {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ensures the video covers the container */
-    display: block;
+    display: none; /* Hidden until first frame arrives */
 }
 
 #camera-placeholder {
     color: var(--secondary-text);
     transition: opacity var(--transition-speed) ease;
+    display: none; /* Hidden until camera is turned on */
 }
 
-#lidar-canvas {
-    width: 100%;
-    height: 100%;
-}
+/* Removed #lidar-container and #lidar-canvas styles */
 
 
 /* ==========================================================================
@@ -243,5 +298,12 @@ h1 {
 
     .metric-value {
         font-size: 2.5em;
+    }
+
+    /* Stack control buttons on small screens */
+    #controls-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
     }
 }
