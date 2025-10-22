@@ -137,6 +137,11 @@ Open a second new terminal window and run:
 
 lt --port 8081
 
+to get Foxglove to work:
+
+npx localtunnel --port 8765 --subdomain mkz-foxglove  and take the output to edit your link 
+
+
 
 
 Note: Save the public wss:// URL (e.g., wss://camera-tunnel.loca.lt).
