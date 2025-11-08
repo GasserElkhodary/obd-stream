@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const statusDiv = document.getElementById('status');
     
     // 1. IMPORTANT: REPLACE WITH YOUR ACTIVE WSS:// TUNNEL FOR OBD (8080)
-    const OBD_WEBSOCKET_URL = 'wss://moody-spiders-teach.loca.lt'; 
+    const OBD_WEBSOCKET_URL = 'wss://orange-pans-sell.loca.lt'; 
     const socket = new WebSocket(OBD_WEBSOCKET_URL);
 
     // 2. IMPORTANT: REPLACE WITH YOUR ACTIVE WSS:// TUNNEL FOR CAMERA (8081)
-    const CAMERA_WEBSOCKET_URL = 'wss://many-signs-tell.loca.lt'; // REPLACE THIS
+    const CAMERA_WEBSOCKET_URL = 'wss://https://tiny-garlics-end.loca.lt'; // REPLACE THIS
     let cameraSocket = null;
     let isCameraOn = false;
 
